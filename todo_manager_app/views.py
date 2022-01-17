@@ -109,10 +109,22 @@ def update_todo(request, todo_id):
     return render(request, "update_todo.html", context)
 
 
+@login_required(login_url='login')
 def delete_todo(request, todo_id):
     todo = Todo.objects.get(id=todo_id)
     todo.delete()
     return redirect('/todos/')
+
+
+# @login_required(login_url='login')
+# def change_status(request, todo_id):
+#     todo = Todo.objects.get(id=todo_id)
+#     form_status_done = TodoForm(request.POST, instance=todo)
+#     if form_status_done.is_valid():
+#         form_status_done.save(request.user)
+#         return redirect('/todos/')
+#     context = {"form": form_status_done}
+#     return render(request, "change_status.html", context)
 
 
 def search_todo(request):

@@ -16,7 +16,7 @@
     <li class="list-group-item d-flex justify-content-between align-items-center">
       <a href="/todos/{{ todo.id }}"><h5>{{ todo.name }}</h5></a>
       It's due {{ todo.due_date }}
-      <span class="badge badge-warning badge-pill"><a href="">Undone</a></span>
+      <span class="badge badge-warning badge-pill"><a href="/todos/{{ todo.id }}/update_todo">Undone</a></span>
   </ul>
  {% endfor %}
 

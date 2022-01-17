@@ -10,8 +10,6 @@ class RegistrationForm(UserCreationForm):
         fields = ['username', 'password1', 'password2']
 
 
-# class SignUpForm()
-
 class TodoForm(forms.ModelForm):
     class Meta:
         model = Todo

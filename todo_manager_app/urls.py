@@ -14,7 +14,7 @@ urlpatterns = [
     path("todos/<int:todo_id>/update_todo/", update_todo, name="update_todo"),
     path("todos/<int:todo_id>/delete_todo/", delete_todo, name="delete_todo"),
     path("search_todo/", search_todo, name="search_todo"),
-
+    # path("change_status/<int:todo_id>/", change_status, name="change_status"),
 ]
 
 
