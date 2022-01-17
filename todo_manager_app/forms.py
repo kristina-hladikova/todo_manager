@@ -18,3 +18,9 @@ class TodoForm(forms.ModelForm):
         fields = ['name', 'description', 'due_date', 'attachment', 'status_done']
 
     # status_done = forms.BooleanField(widget=forms.CheckboxInput)
+
+    def save(self, user):
+        todo = super().save(commit=False)
+        todo.user = user
+        todo.save()
+

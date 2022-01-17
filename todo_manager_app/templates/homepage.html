@@ -1,9 +1,15 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block page_title %}Homepage{% endblock page_title %}
 {% block body %}
 
 <div class="container">
-<h1>Welcome to my page TODO MANAGER</h1><br>
+        <h1>Welcome to my page TODO MANAGER</h1><br>
+        <h4>After registration and signing up you can manage your TODOs.</h4>
+    <p>
+        <h6>Here is an example:</h6>
+    </p>
+        <img src="{% static "todo_manager_app/todos_sample.png" %}" alt="A sample how your TODO's list can look like." style="width:1000px;">
 </div>
 
 {% endblock body %}

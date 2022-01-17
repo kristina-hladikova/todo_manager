@@ -1,53 +1,9 @@
 {% extends 'base.html' %}
 {% block page_title %}Todos{% endblock page_title %}
 {% block body %}
-{#<div class="text-center">#}
-{#    <p>#}
-{#    {% if request.user.is_authenticated %}#}
-{#        Hello {{ request.user.username }}#}
-{#    {% else %}#}
-{#        Hello anonymous user#}
-{#    {% endif %}#}
-{#    </p>#}
-{#    <p>#}
-{#    <a class="btn btn-primary" href="/create_todo">Create a todo</a>#}
-{#    </p>#}
-{#</div>#}
-{#{% if not status_done %}#}
-{##}
-{#    <div class="col-4 offset-4">#}
-{#    Todos undone:#}
-{#       {% for todo in todo_list_undone %}#}
-{#       <div class="container">#}
-{#            <ul class="list-group">#}
-{#                <li class="list-group-item"><a href="/todos/{{ todo.id }}"><h4>{{ todo.name }}</h4></a>#}
-{#                <p>It's due {{ todo.due_date }}</p>#}
-{#                <p>It's not yet done.</p>#}
-{#            </ul>#}
-{#        </div>#}
-{#       {% endfor %}#}
-{#    </div>#}
-{##}
-{#{% else %}#}
-{##}
-{#    <div class="col-4 offset-4">#}
-{#    Todos done:#}
-{#       {% for todo in todo_list_done %}#}
-{#       <div class="container">#}
-{#            <ul class="list-group">#}
-{#                <li class="list-group-item"><a href="/todos/{{ todo.id }}"><h4>{{ todo.name }}</h4></a>#}
-{#                <p>It's due {{ todo.due_date }}</p>#}
-{#                <p>It's done.</p>#}
-{#            </ul>#}
-{#        </div>#}
-{#       {% endfor %}#}
-{#    </div>#}
-{#{% endif %}#}
-
 
 
 <div class="container mt-3">
-    <a href="/todos/" class="btn btn-secondary">Go back</a>
     <a href="/" class="btn btn-secondary">Go home</a>
     <p>
       <h2>List of Todos</h2>
@@ -60,7 +16,7 @@
     <li class="list-group-item d-flex justify-content-between align-items-center">
       <a href="/todos/{{ todo.id }}"><h5>{{ todo.name }}</h5></a>
       It's due {{ todo.due_date }}
-      <span class="badge badge-warning badge-pill">Undone</span>
+      <span class="badge badge-warning badge-pill"><a href="">Undone</a></span>
   </ul>
  {% endfor %}
 

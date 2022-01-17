@@ -16,7 +16,7 @@
                 {% else %}
                 <p>Todo Done!</p>
                 {% endif %}
-                <p>Attachment: <a href="{{ user_directory_path }}">Download</a></p>
+                <p>Attachment: <a href="media/user_{user.id}/{filename}">Download</a></p>
             </div>
             <div class="card-footer">
                 <a href="/todos/{{ todo.id }}/update_todo" class="btn btn-outline-primary">Update this todo</a>

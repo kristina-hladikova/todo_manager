@@ -60,8 +60,8 @@ class RegistrationView(FormMixin, TemplateView):
 @login_required(login_url='login')
 def todo_list(request):
     # todo_list = Todo.objects.filter(user=request.user)
-    todo_list_undone = Todo.objects.filter(status_done=False)
-    todo_list_done = Todo.objects.filter(status_done=True)
+    todo_list_undone = Todo.objects.filter(user=request.user, status_done=False)
+    todo_list_done = Todo.objects.filter(user=request.user, status_done=True)
     context = {
         'todo_list_undone': todo_list_undone,
         'todo_list_done': todo_list_done,
@@ -88,9 +88,9 @@ def todo_detail(request, todo_id):
     return render(request, 'todo_detail.html', context=context)
 
 
-# @login_required(login_url='login')
+@login_required(login_url='login')
 def create_todo(request):
-    form = TodoForm(request.POST or None)
+    form = TodoForm(request.POST or None, request.FILES)
     if form.is_valid():
         form.save(request.user)
         return redirect('/todos/')
@@ -98,12 +98,12 @@ def create_todo(request):
     return render(request, "create_todo.html", context)
 
 
-# @login_required(login_url='login')
+@login_required(login_url='login')
 def update_todo(request, todo_id):
     todo = Todo.objects.get(id=todo_id)
     form = TodoForm(request.POST or None, instance=todo)
     if form.is_valid():
-        form.save()
+        form.save(request.user)
         return redirect(f'/todos/{todo_id}/')
     context = {"form": form}
     return render(request, "update_todo.html", context)
@@ -118,7 +118,7 @@ def delete_todo(request, todo_id):
 def search_todo(request):
     if request.method == "POST":
         searched = request.POST['searched']
-        todos = Todo.objects.filter(name__contains=searched)
+        todos = Todo.objects.filter(user=request.user, name__contains=searched)
         return render(request, 'search_todo.html', {'searched': searched, 'todos': todos})
     else:
         return render(request, 'search_todo.html', {})
