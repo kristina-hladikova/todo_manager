@@ -13,13 +13,14 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 from decouple import AutoConfig
 import os
+import django_heroku
 
+from django.contrib import staticfiles
 
 config = AutoConfig(os.environ.get('DJANGO_CONFIG_ENV_DIR'))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -27,12 +28,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('TODO_MANAGER_SECRET_KEY', 'secret_key')
 
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("TODO_MANAGER_DEBUG")
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -76,7 +75,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'todo_manager.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -86,7 +84,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -106,7 +103,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -120,7 +116,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
@@ -133,5 +128,14 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-import django_heroku
+if "DYNO" in os.environ:
+    STATIC_ROOT = 'staticfiles/'
+    ALLOWED_HOSTS = ['kristi-todo-manager.herokuapp.com']
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+
+
+
 django_heroku.settings(locals())
