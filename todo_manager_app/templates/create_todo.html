@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block page_title %}Create TODO{% endblock page_title %}
+{% block body %}
+
+   <div class="col-4 offset-4">
+        <h4>Create a todo</h4>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-info" type="submit">Submit</button>
+        </form>
+    </div>
+
+{% endblock body %}

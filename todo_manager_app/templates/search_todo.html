@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block page_title %}Search{% endblock page_title %}
+{% block body %}
+<div class="container">
+
+
+{% if searched %}
+    <h4>You searched for {{ searched }}</h4>
+    {% for todo in todos %}
+        <a href="{% url 'todo_detail' todo.id %}">{{ todo }}</a><br>
+    {% endfor %}
+{% else %}
+    <h4> Hey, You Forgot To Search For a Todo...</h4>
+{% endif %}
+</div>
+{% endblock body %}
